@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>Markets</title>
+<item>
+  <title>Nasdaq falls 4.5% in worst week since June as AI stocks slide</title>
+  <link>https://example.com/news/nasdaq-worst-week</link>
+  <description><![CDATA[<p>The Nasdaq Composite fell 4.5% this week, its worst week since late June. The CNN Fear &amp; Greed index dropped to 18 from 46 a week earlier. U.S. bank stocks rose after earnings.</p>]]></description>
+  <pubDate>{RECENT}</pubDate>
+</item>
+<item>
+  <title>Fed's Waller says another rate cut is on the table</title>
+  <link>https://example.com/news/fed-waller</link>
+  <description>Federal Reserve Governor Christopher Waller said on Thursday that a rate cut in December remains possible if inflation keeps easing. He spoke at an event in New York.</description>
+  <pubDate>{RECENT}</pubDate>
+</item>
+<item>
+  <title>Local team wins the championship</title>
+  <link>https://example.com/sports/final</link>
+  <description>A football club won the national title on Sunday.</description>
+  <pubDate>{RECENT}</pubDate>
+</item>
+<item>
+  <title>Old story about bitcoin from last week</title>
+  <link>https://example.com/news/old-bitcoin</link>
+  <description>Bitcoin traded near 80,000 dollars.</description>
+  <pubDate>{OLD}</pubDate>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,58 @@
+# Copy to config.yaml and edit. config.yaml is gitignored (it may contain your tickers).
+
+timezone: Europe/Istanbul
+database: data/invagents.sqlite
+
+telegram:
+  # Global hard cap across all agents (messages per day).
+  max_messages_per_day: 15
+  # No messages in this window (local time). Items wait for the next allowed run.
+  quiet_hours: {start: "23:00", end: "07:30"}
+
+llm:
+  provider: gemini
+  # Any Gemini model id your key can use. Flash models are cheap and have a free tier.
+  model: gemini-2.5-flash
+  # Optional thinking control. Thinking tokens count against max_output_tokens and were a cause of
+  # cut-off summaries, so keep it off/low for summarization.
+  thinking_budget: 0        # Gemini 2.5 models (0 = off). Remove for models that do not accept it.
+  # thinking_level: low     # Gemini 3.x models use this instead of thinking_budget.
+  max_output_tokens: 4096
+  temperature: 0.2
+  timeout_seconds: 60
+  daily_spend_cap_usd: 0.50
+  # USD per 1M tokens, used for the spend cap. Check current Gemini pricing and update.
+  price_per_mtok_input: 0.30
+  price_per_mtok_output: 2.50
+
+tank:
+  enabled: true
+  max_items_per_day: 5
+  min_relevance: 6            # LLM relevance score 0-10
+  max_item_age_hours: 24      # Older news is never sent
+  max_candidates_per_run: 15  # Items sent to the LLM in one call
+  summary_max_chars: 320      # Summary is 1-2 complete sentences within this length
+  # Keywords for the pre-filter (case-insensitive). Put your tickers and topics here.
+  keywords:
+    tickers: [VOO, SPY, QQQ, "S&P 500", Nasdaq, Dow]
+    macro: [Fed, FOMC, TCMB, "Merkez Bankası", faiz, enflasyon, inflation, CPI, "rate cut", "rate hike", tahvil, "Treasury"]
+    fx_commodity: [dolar, "USD/TRY", altın, gold, petrol, oil, Brent]
+    crypto: [bitcoin, BTC, ethereum, ETF]
+    sentiment: ["Fear & Greed", "Fear and Greed", volatility, VIX]
+  feeds:
+    - {name: CNBC Markets, url: "https://www.cnbc.com/id/15839069/device/rss/rss.html"}
+    - {name: CNBC Economy, url: "https://www.cnbc.com/id/20910258/device/rss/rss.html"}
+    - {name: MarketWatch, url: "https://feeds.content.dowjones.io/public/rss/mw_topstories"}
+    - {name: Yahoo Finance, url: "https://finance.yahoo.com/news/rssindex"}
+    - {name: Bloomberg HT, url: "https://www.bloomberght.com/rss"}
+    - {name: AA Ekonomi, url: "https://www.aa.com.tr/tr/rss/default?cat=ekonomi"}
+    - {name: CoinDesk, url: "https://www.coindesk.com/arc/outboundfeeds/rss/"}
+
+  # Deterministic CNN Fear & Greed alert (number comes from CNN's data, never from the LLM).
+  fear_greed:
+    enabled: true
+    week_change_threshold: 20   # alert if |score - score one week ago| >= this
+    extreme_fear_below: 25      # alert when crossing into extreme fear
+    extreme_greed_above: 75     # alert when crossing into extreme greed
+    max_age_hours: 26
+    cooldown_hours: 24

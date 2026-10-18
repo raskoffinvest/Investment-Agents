@@ -1,0 +1,12 @@
+{
+  "fear_and_greed": {
+    "score": 18.2857142857,
+    "rating": "extreme fear",
+    "timestamp": "{TIMESTAMP}",
+    "previous_close": 28.4,
+    "previous_1_week": 46.1,
+    "previous_1_month": 55.0,
+    "previous_1_year": 40.2
+  },
+  "fear_and_greed_historical": {"data": []}
+}
